@@ -12,13 +12,26 @@ function App() {
     setColor([newColor, ...colors]);
   }
 
+  function handleDeleteButton(idToDelete) {
+    setColor(colors.filter((color) => color.id !== idToDelete));
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
       <ColorForm onSubmitValue={handleAddColor} />
-      {colors.map((color) => {
-        return <Color key={color.id} color={color} />;
-      })}
+
+      {colors.length === 0 ? (
+        <p>No colors... Please add one using the Form!</p>
+      ) : (
+        colors.map((color) => (
+          <Color
+            key={color.id}
+            color={color}
+            onHandleDelete={handleDeleteButton}
+          />
+        ))
+      )}
     </>
   );
 }
