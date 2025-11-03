@@ -1,6 +1,11 @@
-export default function ColorForm() {
+import ColorInput from "../ColorInput/ColorInput";
+
+export default function ColorForm({ onSubmitValue }) {
   function handleSubmit(event) {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    onSubmitValue(data);
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -19,16 +24,16 @@ export default function ColorForm() {
         <br />
         <fieldset>
           <legend>Hex</legend>
-          <ColorForm id="hex" name="Hex" />
+          <ColorInput id="hex" name="hex" defaultValue="#123456" />
         </fieldset>
         <br />
         <fieldset>
-          {/* <legend>Contrast Text</legend>
-          <ColorForm id="contrast" name="contrast" /> */}
+          <legend>Contrast Text</legend>
+          <ColorInput id="contrast" name="contrast" defaultValue="#abcdef" />
           <br></br>
         </fieldset>
         <br />
-        <button>Add Color</button>
+        <button type="submit">Add Color</button>
       </fieldset>
       <br />
     </form>
