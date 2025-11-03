@@ -1,6 +1,13 @@
 import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm({ onSubmitValue }) {
+export default function ColorForm({
+  onSubmitValue,
+  initialInformation = {
+    role: "some color",
+    hex: "#123456",
+    contrastText: "#ffffff",
+  },
+}) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -15,21 +22,29 @@ export default function ColorForm({ onSubmitValue }) {
           <legend>Role</legend>
           <input
             type="text"
-            placeholder="Name of Color"
             id="role"
-            name="name"
+            name="role"
+            defaultValue={initialInformation.role}
             required
           />
         </fieldset>
         <br />
         <fieldset>
           <legend>Hex</legend>
-          <ColorInput id="hex" name="hex" defaultValue="#123456" />
+          <ColorInput
+            id="hex"
+            name="hex"
+            defaultValue={initialInformation.hex}
+          />
         </fieldset>
         <br />
         <fieldset>
           <legend>Contrast Text</legend>
-          <ColorInput id="contrast" name="contrast" defaultValue="#abcdef" />
+          <ColorInput
+            id="contrast"
+            name="contrastText"
+            defaultValue={initialInformation.contrastText}
+          />
           <br></br>
         </fieldset>
         <br />
