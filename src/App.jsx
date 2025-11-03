@@ -7,9 +7,13 @@ import { useState } from "react";
 
 function App() {
   const [colors, setColor] = useState(initialColors);
+  // const [deleteButtons, setDeleteButtons] = useState("")
   function handleAddColor(data) {
     const newColor = { id: nanoid(), ...data };
     setColor([newColor, ...colors]);
+  }
+  function handleDeleteButton(idToDelete) {
+    setColor(colors.filter((color) => color.id !== idToDelete));
   }
 
   return (
@@ -17,7 +21,13 @@ function App() {
       <h1>Theme Creator</h1>
       <ColorForm onSubmitValue={handleAddColor} />
       {colors.map((color) => {
-        return <Color key={color.id} color={color} />;
+        return (
+          <Color
+            key={color.id}
+            color={color}
+            onHandleDelete={handleDeleteButton}
+          />
+        );
       })}
     </>
   );
