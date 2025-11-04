@@ -1,6 +1,7 @@
 import ColorInput from "../ColorInput/ColorInput";
 
 export default function ColorForm({
+  buttonLabel,
   onSubmitValue,
   initialInformation = {
     role: "some color",
@@ -48,7 +49,7 @@ export default function ColorForm({
           <br></br>
         </fieldset>
         <br />
-        <button type="submit">Add Color</button>
+        <button type="submit">{buttonLabel || "Add Color"}</button>
       </fieldset>
       <br />
     </form>

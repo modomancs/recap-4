@@ -15,6 +15,13 @@ function App() {
   function handleDeleteButton(idToDelete) {
     setColor(colors.filter((color) => color.id !== idToDelete));
   }
+  function handleEditButton(updatedColor) {
+    setColor(
+      colors.map((color) =>
+        color.id === updatedColor.id ? updatedColor : color
+      )
+    );
+  }
 
   return (
     <>
@@ -29,6 +36,7 @@ function App() {
             key={color.id}
             color={color}
             onHandleDelete={handleDeleteButton}
+            onUpdateColor={handleEditButton}
           />
         ))
       )}
