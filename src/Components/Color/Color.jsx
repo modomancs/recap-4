@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Color.css";
+import CopyToClipboard from "../CopyToCliboard/CopyToClipboard";
 
 import ColorForm from "../ColorForm/ColorForm";
 
@@ -30,6 +31,7 @@ export default function Color({ color, onHandleDelete, onUpdateColor }) {
       ) : (
         <>
           <h3 className="color-card-headline">{color.hex}</h3>
+          <CopyToClipboard hexCode={color.hex} />
           <h4>{color.role}</h4>
           <p>contrast: {color.contrastText}</p>
           <button onClick={() => setEdit(true)}>Edit</button>
