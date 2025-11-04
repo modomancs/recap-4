@@ -3,6 +3,7 @@ import "./Color.css";
 
 export default function Color({ color, onHandleDelete }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [edit, setEdit] = useState("false");
   return (
     <div
       className="color-card"
@@ -22,6 +23,13 @@ export default function Color({ color, onHandleDelete }) {
         </>
       ) : (
         <button onClick={() => setConfirmDelete(true)}>DELETE</button>
+      )}
+      {!edit ? (
+        <>
+          <button onClick={() => setEdit(!edit)}>Update Color</button>
+        </>
+      ) : (
+        <button onClick={() => setEdit(!edit)}>Edit</button>
       )}
     </div>
   );
