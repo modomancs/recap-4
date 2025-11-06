@@ -4,6 +4,7 @@ export default function CopyToClipboard({ hexCode }) {
   const [copy, setCopy] = useState(false);
   async function writeClipboardText() {
     try {
+      // navigator is in browser just like clientX clientY
       await navigator.clipboard.writeText(hexCode);
       setCopy(true);
     } catch (error) {

@@ -11,7 +11,10 @@ function App() {
     defaultValue: initialColors,
   });
   function handleAddColor(data) {
-    const newColor = { id: nanoid(), ...data };
+    const newColor = {
+      id: nanoid(),
+      ...data,
+    };
     setColor([newColor, ...colors]);
   }
 

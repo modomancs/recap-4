@@ -1,19 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Color.css";
 import CopyToClipboard from "../CopyToCliboard/CopyToClipboard";
-
 import ColorForm from "../ColorForm/ColorForm";
 
 export default function Color({ color, onHandleDelete, onUpdateColor }) {
-  //confirmation button
   const [confirmDelete, setConfirmDelete] = useState(false);
-  //edit button
   const [edit, setEdit] = useState(false);
+  const [accessibilityAPI, setAccessibilityAPI] = useState(null);
+
+  useEffect(() => {
+    async function getResult() {
+      try {
+        const response = await fetch(
+          "https://www.aremycolorsaccessible.com/api/are-they",
+          {
+            mode: "cors",
+            method: "POST",
+            body: JSON.stringify({ colors: [color.hex, color.contrastText] }),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        const json = await response.json();
+        setAccessibilityAPI(json);
+      } catch (error) {
+        console.error("API error:", error);
+      }
+    }
+
+    getResult();
+  }, [color.hex, color.contrastText]);
 
   function handleSubmit(data) {
     onUpdateColor({ id: color.id, ...data });
     setEdit(false);
   }
+
   return (
     <div
       className="color-card"
@@ -36,7 +57,27 @@ export default function Color({ color, onHandleDelete, onUpdateColor }) {
           <h3 className="color-card-headline">{color.hex}</h3>
           <CopyToClipboard hexCode={color.hex} />
           <h4>{color.role}</h4>
-          <p>contrast: {color.contrastText}</p>
+          <p>Contrast: {color.contrastText}</p>
+          {accessibilityAPI ? (
+            <p
+              style={{
+                backgroundColor:
+                  accessibilityAPI.overall === "Yup"
+                    ? "lightgreen"
+                    : accessibilityAPI.overall === "Kinda"
+                    ? "khaki"
+                    : accessibilityAPI.overall === "Nope"
+                    ? "lightcoral"
+                    : "transparent",
+                color: accessibilityAPI.overall === "Nope" ? "white" : "black",
+                width: "43%",
+              }}
+            >
+              Contrast Score: {accessibilityAPI.overall}
+            </p>
+          ) : (
+            <p>Checking accessibility...</p>
+          )}
           <button onClick={() => setEdit(true)}>Edit</button>
         </>
       )}
@@ -54,6 +95,6 @@ export default function Color({ color, onHandleDelete, onUpdateColor }) {
         </>
       )}
     </div>
-    // if edit is opposite, in this situation true and confirmdelete false
+    //if edit is opposite(in this case true) and confirmDelete true
   );
 }
