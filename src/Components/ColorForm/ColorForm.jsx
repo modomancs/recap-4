@@ -1,8 +1,10 @@
 import ColorInput from "../ColorInput/ColorInput";
 
 export default function ColorForm({
+  // buttonlabel to update button when clicking edit
   buttonLabel,
   onSubmitValue,
+  //from colors.js
   initialInformation = {
     role: "some color",
     hex: "#123456",

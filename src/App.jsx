@@ -20,6 +20,7 @@ function App() {
   }
   function handleEditButton(updatedColor) {
     setColor(
+      // replace object in the colors array with updated version based on its matching id
       colors.map((color) =>
         color.id === updatedColor.id ? updatedColor : color
       )

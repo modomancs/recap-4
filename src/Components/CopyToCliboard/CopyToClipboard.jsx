@@ -10,7 +10,7 @@ export default function CopyToClipboard({ hexCode }) {
       console.error(error.message);
     }
   }
-  //this is to copy and cleanup after 3000ms (3sec)
+  //this is to copy hex and cleanup after 3000ms (3sec)
   useEffect(() => {
     if (copy) {
       const timeOut = setTimeout(() => setCopy(false), 3000);

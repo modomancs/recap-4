@@ -5,8 +5,11 @@ import CopyToClipboard from "../CopyToCliboard/CopyToClipboard";
 import ColorForm from "../ColorForm/ColorForm";
 
 export default function Color({ color, onHandleDelete, onUpdateColor }) {
+  //confirmation button
   const [confirmDelete, setConfirmDelete] = useState(false);
+  //edit button
   const [edit, setEdit] = useState(false);
+
   function handleSubmit(data) {
     onUpdateColor({ id: color.id, ...data });
     setEdit(false);
@@ -51,5 +54,6 @@ export default function Color({ color, onHandleDelete, onUpdateColor }) {
         </>
       )}
     </div>
+    // if edit is opposite, in this situation true and confirmdelete false
   );
 }
