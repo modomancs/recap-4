@@ -20,8 +20,8 @@ export default function Color({ color, onHandleDelete, onUpdateColor }) {
             headers: { "Content-Type": "application/json" },
           }
         );
-        const json = await response.json();
-        setAccessibilityAPI(json);
+        const data = await response.json();
+        setAccessibilityAPI(data);
       } catch (error) {
         console.error("API error:", error);
       }
@@ -95,6 +95,6 @@ export default function Color({ color, onHandleDelete, onUpdateColor }) {
         </>
       )}
     </div>
-    //if edit is opposite(in this case true) and confirmDelete true
+    //if edit is opposite(in this case true) and confirmDelete false
   );
 }

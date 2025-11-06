@@ -10,6 +10,8 @@ function App() {
   const [colors, setColor] = useLocalStorageState("colors", {
     defaultValue: initialColors,
   });
+
+  //adding new color with random id
   function handleAddColor(data) {
     const newColor = {
       id: nanoid(),
@@ -18,9 +20,11 @@ function App() {
     setColor([newColor, ...colors]);
   }
 
+  // deletes a color based on ID, it searches for colors that do not have the same id as the one i want to delete and keeps them
   function handleDeleteButton(idToDelete) {
     setColor(colors.filter((color) => color.id !== idToDelete));
   }
+
   function handleEditButton(updatedColor) {
     setColor(
       // replace object in the colors array with updated version based on its matching id
